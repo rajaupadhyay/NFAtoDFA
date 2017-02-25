@@ -1,33 +1,42 @@
-import networkx as nx
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from networkx.drawing.nx_agraph import write_dot # PYGRAPHVIZ
+import numpy as np
+from matplotlib.patches import FancyArrowPatch, Circle
+import networkx as nx
 
-def draw_graph(graph, labels, numberofnodes):
-    # create directed networkx graph
-    G = nx.DiGraph()
+def draw_FA(G, pos, ax):
+    # Draw NFA/DFA
+    for n in G:
+        c = Circle(pos[n], radius=0.1, alpha=0.7, color='red', gid='11')
+        ax.add_patch(c)
+        G.node[n]['patch'] = c
+        ax.text(pos[n][0]-0.05, pos[n][1]-0.04, str(n))
+    seen={}
+    for (u,v,d) in G.edges(data=True):
+        n1 = G.node[u]['patch']
+        n2 = G.node[v]['patch']
+        rad = 0.7
+        if (u,v) in seen:
+            rad = seen.get((u,v))
+            rad = (rad + np.sign(rad) * 0.1) * -1
+        alpha = 0.5
 
-    # add edges
-    G.add_edges_from(graph)
+        color = 'k'
+        e = FancyArrowPatch(n1.center, n2.center,
+                            patchA=n1, patchB=n2,
+                            arrowstyle='->',
+                            connectionstyle='arc3,rad=%s' % rad,
+                            mutation_scale=10.0,
+                            lw=2, alpha=alpha, color=color)
+        seen[(u, v)] = rad
+        ax.add_patch(e)
 
-    # graph_pos = nx.spring_layout(G)
-
-    graph_pos = {}
-    for i in range(1,numberofnodes+1):
-        graph_pos[i] = [i,0]
-
-
-    # draw nodes, edges and labels
-    nx.draw_networkx_nodes(G, graph_pos, node_size=1000, node_color='blue', alpha=0.3)
-    # we can now added edge thickness and edge color
-    nx.draw_networkx_edges(G, graph_pos, width=2, alpha=0.3, edge_color='green')
-    nx.draw_networkx_labels(G, graph_pos, font_size=12, font_family='sans-serif')
-
-    nx.draw_networkx_edge_labels(G, graph_pos, edge_labels=labels)
-
-    # write_dot(G, "grid.dot")
-    # show graph
-    plt.show()
-
+#
+# GRAPH = [(1, 2), (2, 1), (1, 3), (1, 4), (4,3)]
+# EDGELABELS = {(1, 2): 'a', (1, 3): 'a', (1, 4): 'c', (2, 1): 'b', (4,3): 'f'}
+#
+# plt.clf()
 
 # Define nodes and edges (user input)
 if __name__ == "__main__":
@@ -53,7 +62,6 @@ if __name__ == "__main__":
     print("\n")
 
 
-
     NumberOfNodes = int(input("ENTER THE NUMBER OF NODES IN NFA:"))
 
     print("**ENTER -1,-1 TO COMPLETE INSERTION OF NODES AND EDGES**")
@@ -72,7 +80,30 @@ if __name__ == "__main__":
                 edgeWeight = "\n\n" + edgeWeight
             EDGELABELS[nodeConnections] = edgeWeight
 
-    draw_graph(GRAPH, EDGELABELS, NumberOfNodes)
+    plt.clf()
+    DG = nx.DiGraph(GRAPH)
+    ax = plt.gca()
+    # pos=nx.spring_layout(DG)
+
+    pos = {}
+    for i in range(1, 5 + 1):
+        pos[i] = [i, 0]
+
+    draw_FA(DG, pos, ax)
+
+    for k in EDGELABELS:
+        standardOffset = 0.4
+        if k[0] != k[1]:
+            coordinatePosition = float((k[0] + k[1]) / 2)
+            ax.annotate(EDGELABELS[k], xy=(k[0], 0), xytext=(coordinatePosition, float((k[0] - k[1]) * standardOffset)))
+        else:
+            ax.plot([k[0]], [-0.22], marker=r'$\circlearrowleft$', ms=25)
+            ax.annotate(EDGELABELS[k], xy=(1, 0), xytext=(0.95, -0.50))
+
+    ax.autoscale()
+    plt.axis('equal')
+    plt.axis('off')
+    plt.savefig('x' + str(1) + '.png')
 
     # print(GRAPH)
     # print(EDGELABELS)
