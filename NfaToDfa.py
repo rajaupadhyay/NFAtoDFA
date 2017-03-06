@@ -32,13 +32,15 @@ def draw_FA(G, pos, ax):
         seen[(u, v)] = rad
         ax.add_patch(e)
 
-#
-# GRAPH = [(1, 2), (2, 1), (1, 3), (1, 4), (4,3)]
-# EDGELABELS = {(1, 2): 'a', (1, 3): 'a', (1, 4): 'c', (2, 1): 'b', (4,3): 'f'}
-#
-# plt.clf()
+
+GRAPH = [(1, 2), (2, 1), (1, 3), (1, 4), (4,3)]
+EDGELABELS = {(1, 2): 'a', (1, 3): 'a', (1, 4): 'c', (2, 1): 'b', (4,3): 'f'}
+
+plt.clf()
+
 
 # Define nodes and edges (user input)
+'''
 if __name__ == "__main__":
     print("\n")
     for x in range(80):
@@ -81,12 +83,14 @@ if __name__ == "__main__":
             EDGELABELS[nodeConnections] = edgeWeight
 
     plt.clf()
+    #print(GRAPH)
+    #print(EDGELABELS)
     DG = nx.DiGraph(GRAPH)
     ax = plt.gca()
     # pos=nx.spring_layout(DG)
 
     pos = {}
-    for i in range(1, 5 + 1):
+    for i in range(1, NumberOfNodes + 1):
         pos[i] = [i, 0]
 
     draw_FA(DG, pos, ax)
@@ -98,7 +102,7 @@ if __name__ == "__main__":
             ax.annotate(EDGELABELS[k], xy=(k[0], 0), xytext=(coordinatePosition, float((k[0] - k[1]) * standardOffset)))
         else:
             ax.plot([k[0]], [-0.22], marker=r'$\circlearrowleft$', ms=25)
-            ax.annotate(EDGELABELS[k], xy=(1, 0), xytext=(0.95, -0.50))
+            ax.annotate(EDGELABELS[k], xy=(1, 0), xytext=(k[0], -0.50))
 
     ax.autoscale()
     plt.axis('equal')
@@ -107,7 +111,7 @@ if __name__ == "__main__":
 
     # print(GRAPH)
     # print(EDGELABELS)
-
+'''
 
 
 
