@@ -5,6 +5,22 @@ import numpy as np
 from matplotlib.patches import FancyArrowPatch, Circle
 import networkx as nx
 
+
+def checkNewNodes():
+    newNodes = []
+    for i in FinalTable:
+        if FinalTable[i] not in currentKeys:
+            currentKeys.append(FinalTable[i])
+            newNodes.append(FinalTable[i])
+    return newNodes
+
+def connectionValues(listVals, edgeWeight):
+    output = []
+    for i in listVals:
+        output.extend(referenceTable[(i,edgeWeight)])
+
+    return list(set(output))
+
 def draw_FA(G, pos, ax):
     # Draw NFA/DFA
     for n in G:
@@ -78,7 +94,7 @@ for i in range(len(distinctEdges)):
         distinctEdges.extend(x)
 
 distinctEdges = list(set(distinctEdges))
-print("Distince Edges:", distinctEdges)
+print("Distinct Edges:", distinctEdges)
 
 NumberOfNodes = 4 # Taken as user input
 
@@ -98,3 +114,32 @@ for i in range(1,NumberOfNodes+1):
         referenceTable[(i,j)] = nodesConnectedTo
 
 print(referenceTable)
+
+# Initialization of final table
+FinalTable = {}
+currentKeys = [[1]]
+
+for i in distinctEdges:
+    FinalTable[(1, i)] = referenceTable[(1,i)]
+
+print(FinalTable)
+
+while True:
+    localListOfNewNodes = checkNewNodes()
+    if localListOfNewNodes == []:
+        break
+    for i in localListOfNewNodes:
+        for j in distinctEdges:
+            FinalTable[(tuple(sorted(i)),j)] = sorted(connectionValues(i, j))
+
+
+print("FINAL TABLE")
+for i in FinalTable:
+    print(i, FinalTable[i])
+
+
+
+
+
+
+
