@@ -19,7 +19,7 @@ def connectionValues(listVals, edgeWeight):
     for i in listVals:
         output.extend(referenceTable[(i,edgeWeight)])
 
-    return list(set(output))
+    return sorted(list(set(output)))
 
 def draw_FA(G, pos, ax):
     # Draw NFA/DFA
@@ -85,7 +85,7 @@ plt.savefig('x' + str(1) + '.png')
 
 # Constructing set of edges and table for nodes to edges
 distinctEdges = list(set([EDGELABELS[k] for k in EDGELABELS]))
-print(distinctEdges)
+# print(distinctEdges)
 for i in range(len(distinctEdges)):
     if len(distinctEdges[i]) > 1:
         x = "".join(distinctEdges[i].split("\n"))
@@ -94,7 +94,7 @@ for i in range(len(distinctEdges)):
         distinctEdges.extend(x)
 
 distinctEdges = list(set(distinctEdges))
-print("Distinct Edges:", distinctEdges)
+# print("Distinct Edges:", distinctEdges)
 
 NumberOfNodes = 4 # Taken as user input
 
@@ -104,7 +104,7 @@ for k in EDGELABELS:
     x = "".join(EDGELABELS[k].split("\n")).split(",")
     StrippedEdgeLabels[k] = x
 
-print(StrippedEdgeLabels)
+# print(StrippedEdgeLabels)
 
 referenceTable = {}
 
@@ -113,7 +113,7 @@ for i in range(1,NumberOfNodes+1):
         nodesConnectedTo = [k[1] for k in StrippedEdgeLabels if k[0] == i and j in StrippedEdgeLabels[k]]
         referenceTable[(i,j)] = nodesConnectedTo
 
-print(referenceTable)
+# print(referenceTable)
 
 # Initialization of final table
 FinalTable = {}
@@ -122,20 +122,70 @@ currentKeys = [[1]]
 for i in distinctEdges:
     FinalTable[(1, i)] = referenceTable[(1,i)]
 
-print(FinalTable)
+# print(FinalTable)
 
+
+NodeList = {(1) : 1}
+ExistingNodes = []
+counter = 2
 while True:
     localListOfNewNodes = checkNewNodes()
+    for i in localListOfNewNodes:
+        if sorted(i) not in ExistingNodes:
+            NodeList[tuple(sorted(i))] = counter
+            ExistingNodes.append(sorted(i))
+            counter += 1
+
     if localListOfNewNodes == []:
         break
     for i in localListOfNewNodes:
         for j in distinctEdges:
             FinalTable[(tuple(sorted(i)),j)] = sorted(connectionValues(i, j))
 
+# print(NodeList)
+# print(FinalTable)
 
-print("FINAL TABLE")
-for i in FinalTable:
-    print(i, FinalTable[i])
+# PRINT HERE DERIVE GRAPH LIKE ABOVE ON LINE 52
+# NodeConnections = [(NodeList[k[0]], (FinalTable[k])) for k in FinalTable]
+NodeConnections = []
+EDGELABELS2 = {}
+
+for k in FinalTable:
+    if len(FinalTable[k]) > 1:
+        NodeConnections.append((NodeList[k[0]], NodeList[tuple(sorted(FinalTable[k]))]))
+    else:
+        NodeConnections.append((NodeList[k[0]],*FinalTable[k]))
+    EDGELABELS2[(k[0], tuple(sorted(FinalTable[k])))] = k[1]
+
+# print(EDGELABELS2)
+
+FinalDict = {}
+
+for k in EDGELABELS2:
+    if not isinstance(k[0], int):
+        val1 = NodeList[k[0]]
+    else:
+        val1 = k[0]
+    if len(list(k[1])) > 1:
+        val2 = NodeList[k[1]]
+    else:
+        val2 = k[1][0]
+    FinalDict[(val1, val2)] = EDGELABELS2[k]
+
+# INPUT GRAPH TO DRAW FUNCTION *************************************************************************************
+print(NodeConnections)
+
+print(FinalDict)
+
+
+
+
+
+
+
+
+
+
 
 
 
