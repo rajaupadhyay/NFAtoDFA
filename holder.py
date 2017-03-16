@@ -55,7 +55,6 @@ EDGELABELS = {(1, 1): '\n\na,b', (1, 2): 'a', (2, 3): 'b', (3, 4): 'a', (4,4): '
 plt.clf()
 
 
-plt.clf()
 #print(GRAPH)
 #print(EDGELABELS)
 DG = nx.DiGraph(GRAPH)
@@ -178,7 +177,34 @@ print(NodeConnections)
 print(FinalDict)
 
 
+plt.clf()
 
+
+#print(GRAPH)
+#print(EDGELABELS)
+DG = nx.DiGraph(NodeConnections)
+ax = plt.gca()
+# pos=nx.spring_layout(DG)
+
+pos = {}
+for i in range(1, len(NodeConnections)+1):
+    pos[i] = [i, 0]
+
+draw_FA(DG, pos, ax)
+
+for k in FinalDict:
+    standardOffset = 0.4
+    if k[0] != k[1]:
+        coordinatePosition = float((k[0] + k[1]) / 2)
+        ax.annotate(FinalDict[k], xy=(k[0], 0), xytext=(coordinatePosition, float((k[0] - k[1]) * standardOffset)))
+    else:
+        ax.plot([k[0]], [-0.22], marker=r'$\circlearrowleft$', ms=25)
+        ax.annotate(FinalDict[k], xy=(1, 0), xytext=(k[0], -0.50))
+
+ax.autoscale()
+plt.axis('equal')
+plt.axis('off')
+plt.savefig('x' + str(2) + '.png')
 
 
 
