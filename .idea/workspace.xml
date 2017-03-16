@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e448e0b-2bc8-4424-bdd4-6e5528c2afa4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/holder.py" afterPath="$PROJECT_DIR$/holder.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/x1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/x2.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="NFAtoDFA.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,37 +25,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="holder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/holder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2685">
-              <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NFAtoDFA.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NFAtoDFA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NFAtoDFA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+            <state relative-caret-position="95">
+              <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="x1.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/x1.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="x2.png" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/x2.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -658,12 +636,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NFAtoDFA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/x2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/x1.png">
@@ -671,9 +646,22 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/x2.png">
+    <entry file="file://$PROJECT_DIR$/DFA2.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NFA1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NFAtoDFA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

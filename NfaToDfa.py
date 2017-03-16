@@ -123,7 +123,7 @@ if __name__ == "__main__":
     ax.autoscale()
     plt.axis('equal')
     plt.axis('off')
-    plt.savefig('x' + str(1) + '.png')
+    plt.savefig('NFA' + str(1) + '.png')
 
     # print(GRAPH)
     # print(EDGELABELS)
@@ -252,7 +252,7 @@ if __name__ == "__main__":
     ax.autoscale()
     plt.axis('equal')
     plt.axis('off')
-    plt.savefig('x' + str(2) + '.png')
+    plt.savefig('DFA' + str(2) + '.png')
 
 
 
